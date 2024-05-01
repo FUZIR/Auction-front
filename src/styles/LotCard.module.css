@@ -1,0 +1,39 @@
+.card{
+    margin:10px;
+    width: 20%;
+    height: auto;
+    padding: 20px;
+    border-radius: 20px;
+    border: #000 2px dashed;
+    
+}
+.card:hover{
+    border: #000 2px solid;
+    cursor: pointer;
+}
+.card > p{
+    margin-top: 10px;
+}
+.card_btn{
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: aliceblue;
+    border-radius: 10px;
+    border:#000 2px dashed;
+    font-weight: 500;
+    position: relative;
+    margin-top: 40px;
+}
+.card_btn:hover{
+    transition-duration: 0.3s;
+    transform: scale(1.1);
+    border:#000 2px solid;
+    cursor: pointer;
+}
+.lots{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
