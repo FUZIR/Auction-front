@@ -20,11 +20,23 @@ function LotsList() {
       });
   }, []);
 
+  const getCreator = (lot, lots) => {
+    if (lot.Creator && lot.Creator.$ref) {
+      const creatorId = lot.Creator.$ref;
+      const creator = lots.find((item) => item.Id === creatorId);
+      return creator && creator.Nickname ? creator.Nickname : 'Unknown';
+    } else if (lot.Creator && lot.Creator.Nickname) {
+      return lot.Creator.Nickname;
+    } else {
+      return 'Unknown';
+    }
+  };
   return (
     <div className={styles.lots}>
       {Array.isArray(lots) ? (
         lots.map(lot => (
           <LotCard
+            id = {lot.Id}
             key={lot.Id} // Предположим, что каждый лот имеет уникальный идентификатор
             name={lot.Name}
             description={lot.Description}
@@ -32,7 +44,7 @@ function LotsList() {
             currentBid={lot.CurrentPrice}
             status={lot.Status}
             endTime={lot.EndTime}
-            creator={lot.CreatorId}
+            creator={getCreator(lot, lots)}
           />
         ))
       ) : (

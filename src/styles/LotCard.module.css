@@ -37,3 +37,8 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+.moreinfo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

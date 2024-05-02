@@ -1,7 +1,9 @@
 import React from 'react'
 import styles from '/src/styles/LotCard.module.css'
+import { Link
+ } from 'react-router-dom';
 
-function LotCard({ name, description,startingPrice, currentBid, status, endTime, creator }) {
+function LotCard({ id, name, description,startingPrice, currentBid, status, endTime, creator }) {
     const getStatusText = (status) => {
         switch (status) {
           case 0:
@@ -37,7 +39,10 @@ function LotCard({ name, description,startingPrice, currentBid, status, endTime,
         <p>Status: {getStatusText(status)}</p>
         <p>End time: {formatEndDate(endTime)}</p>
         <p>Creator: {creator}</p>
-        <button className={styles.card_btn}>More Info</button>
+        <Link to={`${id}`} >
+           <button className={styles.card_btn}>More Info</button>
+        </Link>
+       
         {status == 0? <button className={styles.card_btn}>Make bid</button>:<></>}
     </div>
   )
