@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react';
 import styles from '../styles/LotCard.module.css'
 import { useParams } from 'react-router-dom';
