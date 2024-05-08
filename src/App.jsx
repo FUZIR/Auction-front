@@ -9,13 +9,15 @@ import NotFoundPage from './pages/NotFoundPage';
 import MoreInfoPage from './pages/MoreInfoPage';
 import { useState } from 'react';
 import RegisterModal from './components/RegisterModal';
+import LoginModal from './components/LoginModal';
 
 function App() {
-  const [modalActive, setModalActive] = useState(false);
+  const [registerModalActive, setRegisterModalActive] = useState(false);
+  const [loginModalActive, setLoginModalActive] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   return (
     <div>
-      <Header setModalActive={setModalActive} />
+      <Header setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} setLoginModalActive={setLoginModalActive} setRegisterModalActive={setRegisterModalActive}/>
       
       <Routes>
               <Route path="*" element = {<MainPage/>}/>
@@ -24,7 +26,8 @@ function App() {
               <Route path="*" element={<NotFoundPage/>}/>
               <Route path="lots/:id" element={<MoreInfoPage/>}/>
       </Routes>
-      <RegisterModal modalActive={modalActive} setModalActive={setModalActive} />
+      <RegisterModal modalActive={registerModalActive} setModalActive={setRegisterModalActive} />
+      <LoginModal modalActive={loginModalActive} setModalActive={setLoginModalActive} setIsAuthenticated={setIsAuthenticated} />
     </div>
   )
 }

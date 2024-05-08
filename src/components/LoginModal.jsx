@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Modal from './Modal'
+import {useState, useEffect} from 'react'
 import styles from '../styles/Form.module.css'
-import axios from 'axios';
+import axios from 'axios'
+import { Cookies, useCookies } from 'react-cookie'
 
-function RegisterModal({ modalActive, setModalActive }) {
+function LoginModal({ modalActive, setModalActive, setIsAuthenticated }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [nickname, setNickname] = useState('');
     const [emailDirty, setEmailDirty] = useState(false);
     const [passwordDirty, setPasswordDirty] = useState(false);
-    const [nicknameDirty, setNicknameDirty] = useState(false);
     const [emailError, setEmailError] = useState("Email cannot be empty");
     const [passwordError, setPasswordError] = useState("Password cannot be empty");
-    const [nicknameError, setNicknameError] = useState("Nickname cannot be empty");
     const [formValid, setFormValid] = useState(false);
     const [serverResponse, setServerResponse] = useState('');
+    const [cookies, setCookie, removeCookie] = useCookies(['id']);
 
     useEffect(()=>{
-        if(emailError||passwordError||nicknameError){
+        if(emailError||passwordError){
             setFormValid(false)
         }
         else{
             setFormValid(true);
         }
-    },[emailError, passwordError, nicknameError])
+    },[emailError, passwordError])
 
     const emailHandler = (e)=>{
         setEmail(e.target.value);
@@ -47,14 +47,7 @@ function RegisterModal({ modalActive, setModalActive }) {
         }
 
     }
-    const nicknameHandler = (e)=>{
-        setNickname(e.target.value);
-        if(!e.target.value){
-            setNicknameError("Nickname cannot be empty");
-        }else{
-            setNicknameError("");
-        }
-    }
+    
     const blureHandler = (e)=>{
         switch (e.target.name){
             case 'email':
@@ -64,34 +57,29 @@ function RegisterModal({ modalActive, setModalActive }) {
             case 'password':
                 setPasswordDirty(true);
                 break;
-            case 'nickname':
-                setNicknameDirty(true);
-                break;
         }
     }
-
     const handleSubmit = async (e)=>{
         e.preventDefault();
 
-        if (!emailError && !passwordError && !nicknameError) {
-            try {
-                const response = await axios.post('http://localhost:5180/api/register', {
+        if(!emailError && !passwordError){
+            try{
+                const response = await axios.post("http://localhost:5180/api/login",{
                     email,
-                    password,
-                    nickname
+                    password
                 });
-                if (response.status === 200) { // Проверяем статус код ответа
-                    setServerResponse("Register successful"); // Обновляем состояние с ответом от сервера
+                if(response.status === 200){
+                    console.log("Login succesful");
+                    setCookie("id", response.data);
+                    setIsAuthenticated(true);
                     setModalActive(false);
-                } else {
-                    console.error('Error:', response.statusText);
                 }
-            } catch (error) {
-                console.error('Error:', error);
-                setServerResponse('An error occurred. Please try again later.');
+            }
+            catch(err){
+                console.log("Error: ", err);
+                setServerResponse('Email or password is wrong!');
             }
         }
-        
     }
   return (
     <Modal active = {modalActive} setActive={setModalActive} >
@@ -102,9 +90,6 @@ function RegisterModal({ modalActive, setModalActive }) {
       <label htmlFor="password"><h2>Password:</h2></label>
       {(passwordDirty && passwordError) && <div style ={{color:"red"}}>{passwordError}</div>}
       <input onChange={e=>passwordHandler(e)} onBlur ={e=>blureHandler(e)} type="password" placeholder="Enter password" name="password" id="password" required  className={styles.input}/>
-      <label htmlFor="nickname"><h2>Nickname:</h2></label>
-      {(nicknameDirty && nicknameError) && <div style ={{color:"red"}}>{nicknameError}</div>}
-      <input onChange={e=>nicknameHandler(e)} onBlur ={e=>blureHandler(e)} type="nickname" placeholder="Enter nickname" name="nickname" id="nickname" required className={styles.input}/>
       <button disabled = {!formValid} type="submit" className={styles.regbtn} onClick={handleSubmit}>Sign Up</button>
       <p style={{ color: "red", marginTop:"10px" }}>{serverResponse}</p>
     </form>
@@ -112,4 +97,4 @@ function RegisterModal({ modalActive, setModalActive }) {
   )
 }
 
-export default RegisterModal
+export default LoginModal
