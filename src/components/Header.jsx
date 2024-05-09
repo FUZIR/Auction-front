@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 const Header = ({setLoginModalActive, setRegisterModalActive,isAuthenticated, setIsAuthenticated}) => {
-  const [cookies, removeCookies] = useCookies(['id']);
+  const [cookies,setCookies, removeCookies] = useCookies(['id']);
 
   const handleLogout = () =>{
     setIsAuthenticated(false);
@@ -21,6 +21,7 @@ const Header = ({setLoginModalActive, setRegisterModalActive,isAuthenticated, se
             </ul>
             {isAuthenticated ? (
             <div style = {{display:"flex", alignItems:"center", justifyContent:"space-between"}} >
+              <button  className={styles.btn} style={{marginRight:"50px"}}>Create Lot</button>
               <p style = {{marginRight:"50px"}}>{cookies.id}</p>
               <button onClick={handleLogout} className={styles.btn}>Log out</button>
             </div>

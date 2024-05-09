@@ -20,9 +20,8 @@ function App() {
       <Header setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} setLoginModalActive={setLoginModalActive} setRegisterModalActive={setRegisterModalActive}/>
       
       <Routes>
-              <Route path="*" element = {<MainPage/>}/>
               <Route path="lots" element ={<LotsPage/>}/>
-              <Route path="account" element ={<AccountPage/>}/>
+              <Route path="account" element ={<AccountPage isAuthenticated={isAuthenticated}/>}/>
               <Route path="*" element={<NotFoundPage/>}/>
               <Route path="lots/:id" element={<MoreInfoPage/>}/>
       </Routes>

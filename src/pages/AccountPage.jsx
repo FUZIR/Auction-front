@@ -1,9 +1,11 @@
 import React from 'react'
 import Header from '../components/Header'
+import AccountInfo from '../components/AccountInfo'
 
-function AccountPage() {
+function AccountPage({isAuthenticated}) {
   return (
     <>
+      <AccountInfo isAuthenticated={isAuthenticated}/>
     </> 
       
   )

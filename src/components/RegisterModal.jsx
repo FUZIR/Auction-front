@@ -15,7 +15,7 @@ function RegisterModal({ modalActive, setModalActive }) {
     const [nicknameError, setNicknameError] = useState("Nickname cannot be empty");
     const [formValid, setFormValid] = useState(false);
     const [serverResponse, setServerResponse] = useState('');
-
+    
     useEffect(()=>{
         if(emailError||passwordError||nicknameError){
             setFormValid(false)
