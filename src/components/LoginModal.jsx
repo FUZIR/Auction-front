@@ -90,7 +90,7 @@ function LoginModal({ modalActive, setModalActive, setIsAuthenticated }) {
       <label htmlFor="password"><h2>Password:</h2></label>
       {(passwordDirty && passwordError) && <div style ={{color:"red"}}>{passwordError}</div>}
       <input onChange={e=>passwordHandler(e)} onBlur ={e=>blureHandler(e)} type="password" placeholder="Enter password" name="password" id="password" required  className={styles.input}/>
-      <button disabled = {!formValid} type="submit" className={styles.regbtn} onClick={handleSubmit}>Sign Up</button>
+      <button disabled = {!formValid} type="submit" className={styles.regbtn} onClick={handleSubmit}>Sign In</button>
       <p style={{ color: "red", marginTop:"10px" }}>{serverResponse}</p>
     </form>
   </Modal>

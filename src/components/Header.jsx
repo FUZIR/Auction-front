@@ -1,10 +1,9 @@
-import React from 'react';
 import logo from '/auction.svg';
 import styles from '/src/styles/Header.module.css';
 import {Link} from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
-const Header = ({setLoginModalActive, setRegisterModalActive,isAuthenticated, setIsAuthenticated}) => {
+const Header = ({setLoginModalActive, setRegisterModalActive, setCreateLotModalActive,isAuthenticated, setIsAuthenticated}) => {
   const [cookies,setCookies, removeCookies] = useCookies(['id']);
 
   const handleLogout = () =>{
@@ -21,7 +20,7 @@ const Header = ({setLoginModalActive, setRegisterModalActive,isAuthenticated, se
             </ul>
             {isAuthenticated ? (
             <div style = {{display:"flex", alignItems:"center", justifyContent:"space-between"}} >
-              <button  className={styles.btn} style={{marginRight:"50px"}}>Create Lot</button>
+              <button onClick={()=>setCreateLotModalActive(true)} className={styles.btn} style={{marginRight:"50px"}} >Create Lot</button>
               <p style = {{marginRight:"50px"}}>{cookies.id}</p>
               <button onClick={handleLogout} className={styles.btn}>Log out</button>
             </div>

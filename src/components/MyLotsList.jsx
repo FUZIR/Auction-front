@@ -12,7 +12,7 @@ function MyLotsList({id}) {
             setMyLots(response.data.$values)
         })
         .catch(error=>console.log(error));
-    },[id])
+    },[id, myLots])
   return (
     <div className={styles.lots}>
         {Array.isArray(myLots)?

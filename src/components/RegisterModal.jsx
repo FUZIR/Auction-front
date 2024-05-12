@@ -80,8 +80,8 @@ function RegisterModal({ modalActive, setModalActive }) {
                     password,
                     nickname
                 });
-                if (response.status === 200) { // Проверяем статус код ответа
-                    setServerResponse("Register successful"); // Обновляем состояние с ответом от сервера
+                if (response.status === 200) { 
+                    setServerResponse("Register successful");
                     setModalActive(false);
                 } else {
                     console.error('Error:', response.statusText);

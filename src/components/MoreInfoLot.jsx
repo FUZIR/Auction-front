@@ -12,8 +12,8 @@ function MoreInfoLot() {
         axios.get(`http://localhost:5180/api/lots/get?id=${id}`)
         .then(response => {
             setLot(response.data)
-        .catch(error=>console.log(error.message));
         })
+        .catch(error=>console.log(error.message));
     },[id])
     const getStatusText = (status) => {
         switch (status) {

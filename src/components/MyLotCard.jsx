@@ -1,6 +1,7 @@
 import styles from '/src/styles/LotCard.module.css'
-import { Link
- } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import logo from '../assets/211652_close_icon.svg';
+import axios from 'axios';
 
 function LotCard({ id, name, description,startingPrice, currentBid, status, endTime, creator }) {
     const getStatusText = (status) => {
@@ -29,6 +30,19 @@ function LotCard({ id, name, description,startingPrice, currentBid, status, endT
         });
         return formattedDate;
       };
+
+      const handleOnClick = async (e)=>{
+        e.preventDefault();
+
+        try {
+          const response = await axios.delete(`http://localhost:5180/api/lots/delete?id=${id}`);
+          if(response.status === 200){
+            console.log("Delete successful");
+          }
+        } catch (error) {
+          console.log("Error: ", error)
+        }
+      }
   return (
     <div className={styles.card}>
         <h3>{name}</h3>
@@ -41,6 +55,7 @@ function LotCard({ id, name, description,startingPrice, currentBid, status, endT
         <Link to={`/lots/${id}`} >
            <button className={styles.card_btn}>More Info</button>
         </Link>
+        <button className={styles.card_btn} onClick={handleOnClick}>Delete Lot</button>
     </div>
   )
 }

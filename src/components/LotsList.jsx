@@ -18,7 +18,7 @@ function LotsList() {
         // Обработка ошибки
         console.error('Ошибка при получении данных:', error);
       });
-  }, []);
+  }, [lots]);
 
   const getCreator = (lot, lots) => {
     if (lot.Creator && lot.Creator.$ref) {
@@ -37,7 +37,7 @@ function LotsList() {
         lots.map(lot => (
           <LotCard
             id = {lot.Id}
-            key={lot.Id} // Предположим, что каждый лот имеет уникальный идентификатор
+            key={lot.Id}
             name={lot.Name}
             description={lot.Description}
             startingPrice={lot.StartingPrice}
