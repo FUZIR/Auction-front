@@ -5,7 +5,7 @@ import LotsList from '../components/LotsList'
 function LotsPage() {
   return (
     <>
-        <LotsList/>
+        <LotsList />
     </>  
   )
 }

@@ -10,11 +10,13 @@ import { useState } from 'react';
 import RegisterModal from './components/RegisterModal';
 import LoginModal from './components/LoginModal';
 import CreateLotModal from './components/CreateLotModal';
+import CreateBidModal from './components/CreateBidModal';
 
 function App() {
   const [registerModalActive, setRegisterModalActive] = useState(false);
   const [loginModalActive, setLoginModalActive] = useState(false);
   const [createLotModalActive, setCreateLotModalActive] = useState(false);
+  const [createBidModalActive, setBidModalActive] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   return (
     <div>
@@ -22,7 +24,7 @@ function App() {
       
       <Routes>
               <Route path="" element={<MainPage/>}/>
-              <Route path="lots" element ={<LotsPage/>}/>
+              <Route path="lots" element ={<LotsPage modalActive={createBidModalActive}/>}/>
               <Route path="account" element ={<AccountPage isAuthenticated={isAuthenticated}/>}/>
               <Route path="*" element={<NotFoundPage/>}/>
               <Route path="lots/:id" element={<MoreInfoPage/>}/>
@@ -30,6 +32,7 @@ function App() {
       <RegisterModal modalActive={registerModalActive} setModalActive={setRegisterModalActive} />
       <LoginModal modalActive={loginModalActive} setModalActive={setLoginModalActive} setIsAuthenticated={setIsAuthenticated} />
       <CreateLotModal modalActive={createLotModalActive} setModalActive={setCreateLotModalActive}/>
+      <CreateBidModal modalActive={createBidModalActive} setModalActive={setBidModalActive}/>
     </div>
   )
 }

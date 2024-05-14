@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from '/src/styles/LotCard.module.css'
 import { Link
  } from 'react-router-dom';
+import CreateBidModal from './CreateBidModal';
+function LotCard({ id, name, description,startingPrice, currentBid, status, endTime, creator, modalActive, setModalActive }) {
 
-function LotCard({ id, name, description,startingPrice, currentBid, status, endTime, creator }) {
     const getStatusText = (status) => {
         switch (status) {
           case 0:
@@ -43,8 +44,10 @@ function LotCard({ id, name, description,startingPrice, currentBid, status, endT
            <button className={styles.card_btn}>More Info</button>
         </Link>
        
-        {status == 0? <button className={styles.card_btn}>Make bid</button>:<></>}
+        {status == 0? <button className={styles.card_btn} onClick={()=>setModalActive(true)}>Make bid</button>:<></>}
+        <CreateBidModal id={id} modalActive={modalActive} setModalActive={setModalActive}/>
     </div>
+    
   )
 }
 

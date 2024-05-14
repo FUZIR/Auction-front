@@ -48,7 +48,7 @@ function MoreInfoLot() {
                     <h3>{lot.Name}</h3>
                     <p>Description: {lot.Description}</p>
                     <p>Starting price: {lot.StartingPrice != null ? lot.StartingPrice + "$" : 0}</p>
-                    <p>Current bid: {lot.CurrentBid != null ? lot.CurrentBid + "$" : 0}</p>
+                    <p>Current bid: {lot.CurrentPrice != null ? lot.CurrentPrice + "$" : 0}</p>
                     <p>Status: {getStatusText(lot.Status)}</p>
                     <p>Start Time time: {formatEndDate(lot.StartTime)}</p>
                     <p>End time: {formatEndDate(lot.EndTime)}</p>

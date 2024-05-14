@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import LotCard from './LotCard'; // Предполагается, что компонент LotCard находится в отдельном файле
+import LotCard from './LotCard';
 import styles from '/src/styles/LotCard.module.css';
 
 function LotsList() {
   const [lots, setLots] = useState([]);
+  const [modalActive, setModalActive] = useState(false);
 
   useEffect(() => {
-    // Выполнение запроса к серверу при загрузке компонента
     axios.get('http://localhost:5180/api/lots/get_all')
       .then(response => {
-        // Обработка успешного ответа
         console.log(response.data)
-        setLots(response.data.$values); // Сохранение полученных данных в состоянии
+        setLots(response.data.$values);
       })
       .catch(error => {
-        // Обработка ошибки
         console.error('Ошибка при получении данных:', error);
       });
-  }, [lots]);
+  }, []);
 
   const getCreator = (lot, lots) => {
     if (lot.Creator && lot.Creator.$ref) {
@@ -36,6 +34,8 @@ function LotsList() {
       {Array.isArray(lots) ? (
         lots.map(lot => (
           <LotCard
+          modalActive={modalActive}
+          setModalActive={setModalActive}
             id = {lot.Id}
             key={lot.Id}
             name={lot.Name}
